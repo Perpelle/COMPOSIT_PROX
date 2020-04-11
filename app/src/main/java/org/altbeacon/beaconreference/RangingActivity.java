@@ -72,6 +72,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                     String a=d.getProxemicZoneByDistance();
                     Log.d("m1",a +firstBeacon.getDistance());
                     // mettre void afficher informations
+                    String info = "projet confidentiel";
                     if (a == "intimiZone") {
                         alarme.start();
 
@@ -81,10 +82,11 @@ public class RangingActivity extends Activity implements BeaconConsumer {
 
                     } else if (a == "socialZone") {
                         //Afficher certaines informations
+                        Log.d("DIST", info);
 
                     } else if (a == "publicZone") {
                         //Afficher certaines informations
-
+                        Log.d("DIST", info);
                     }
                 }
             }
