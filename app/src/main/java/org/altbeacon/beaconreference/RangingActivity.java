@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import android.app.Activity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
     //Permet de définir les zones  proxémiques
     ProxZone proxzone;
     String zoneProxemique;
+    MediaPlayer alarme = MediaPlayer.create(this, R.raw.alarme1);
 
     @Override
     // permet de demarrer comme la methode main dans java
@@ -37,18 +39,18 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         proxzone = new ProxZone(0.5D, 1.0D, 1.5D, 2.0D);
     }
 
-    @Override 
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    @Override 
+    @Override
     protected void onPause() {
         super.onPause();
         beaconManager.unbind(this);
     }
 
-    @Override 
+    @Override
     protected void onResume() {
         super.onResume();
         beaconManager.bind(this);
@@ -58,20 +60,34 @@ public class RangingActivity extends Activity implements BeaconConsumer {
     public void onBeaconServiceConnect() {
 
         RangeNotifier rangeNotifier = new RangeNotifier() {
-           @Override
-           public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-              if (beacons.size() > 0) {
-                  Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
-                  Beacon firstBeacon = beacons.iterator().next();
-                  logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
-                  //Log.d("m1","distance "+firstBeacon.getDistance());
-                  Dilmo d= new Dilmo (proxzone);
-                  d.setProxemicDistance(firstBeacon.getDistance());
-                  String a=d.getProxemicZoneByDistance();
-                  Log.d("m1",a +firstBeacon.getDistance());
-              // mettre void afficher informations
-              }
-           }
+            @Override
+            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+                if (beacons.size() > 0) {
+                    Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
+                    Beacon firstBeacon = beacons.iterator().next();
+                    logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
+                    //Log.d("m1","distance "+firstBeacon.getDistance());
+                    Dilmo d= new Dilmo (proxzone);
+                    d.setProxemicDistance(firstBeacon.getDistance());
+                    String a=d.getProxemicZoneByDistance();
+                    Log.d("m1",a +firstBeacon.getDistance());
+                    // mettre void afficher informations
+                    if (a == "intimiZone") {
+                        alarme.start();
+
+                    } else if (a == "personalZone") {
+                        //Alarme sur le telephone
+                        alarme.start();
+
+                    } else if (a == "socialZone") {
+                        //Afficher certaines informations
+
+                    } else if (a == "publicZone") {
+                        //Afficher certaines informations
+
+                    }
+                }
+            }
 
         };
 
