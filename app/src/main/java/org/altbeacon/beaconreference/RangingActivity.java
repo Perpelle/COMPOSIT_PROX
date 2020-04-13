@@ -28,7 +28,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
     //Permet de définir les zones  proxémiques
     ProxZone proxzone;
     String zoneProxemique;
-    MediaPlayer alarme = MediaPlayer.create(this, R.raw.alarme1);
+    MediaPlayer alarme;
 
     @Override
     // permet de demarrer comme la methode main dans java
@@ -73,21 +73,30 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                     Log.d("m1",a +firstBeacon.getDistance());
                     // mettre void afficher informations
                     String info = "projet confidentiel";
-
-                    if (a.equals("intimiZone")) {
-                        //Alarme sur le telephone
+                    alarme = MediaPlayer.create(getApplicationContext(), R.raw.alarme1);
+                    alarme.setLooping(true);
+                    alarme.seekTo(0);
+                    if (a == "intimiZone") {
+                        alarme.setVolume(1f,1f);
                         alarme.start();
 
-                    } else if (a.equals("personalZone")) {
+                    } else if (a == "personalZone") {
                         //Alarme sur le telephone
+                        alarme.setVolume(0.5f,0.5f);
                         alarme.start();
 
-                    } else if (a.equals("socialZone")) {
+                    } else if (a == "socialZone") {
                         //Afficher certaines informations
+                        if(alarme.isPlaying()) {
+                            alarme.pause();
+                        }
                         Log.d("DIST", info);
 
-                    } else if (a.equals("publicZone")) {
+                    } else if (a == "publicZone") {
                         //Afficher certaines informations
+                        if(alarme.isPlaying()) {
+                            alarme.pause();
+                        }
                         Log.d("DIST", info);
                     }
                 }
