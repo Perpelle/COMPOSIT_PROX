@@ -76,23 +76,23 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                     alarme = MediaPlayer.create(getApplicationContext(), R.raw.alarme1);
                     alarme.setLooping(true);
                     alarme.seekTo(0);
-                    if (a == "intimiZone") {
+                    if (a.equals("intimiZone")) {
                         alarme.setVolume(1f,1f);
                         alarme.start();
 
-                    } else if (a == "personalZone") {
+                    } else if (a.equals("personalZone")) {
                         //Alarme sur le telephone
                         alarme.setVolume(0.5f,0.5f);
                         alarme.start();
 
-                    } else if (a == "socialZone") {
+                    } else if (a.equals("socialZone")) {
                         //Afficher certaines informations
                         if(alarme.isPlaying()) {
                             alarme.pause();
                         }
                         Log.d("DIST", info);
 
-                    } else if (a == "publicZone") {
+                    } else if (a.equals("publicZone")) {
                         //Afficher certaines informations
                         if(alarme.isPlaying()) {
                             alarme.pause();
