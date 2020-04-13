@@ -13,8 +13,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
@@ -29,17 +33,25 @@ import java.util.Collection;
  * @author dyoung
  * @author Matt Tyler
  */
-public class MonitoringActivity extends Activity  {
+public class MonitoringActivity extends Activity implements AdapterView.OnItemSelectedListener {
 	protected static final String TAG = "MonitoringActivity";
 	private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
 	private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
 
+	 public static String spinnerValue;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_monitoring);
 		verifyBluetooth();
+
+		spinnerValue="";
+		Spinner spinner = findViewById(R.id.spinner1);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.statut, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(this);
 
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -230,4 +242,14 @@ public class MonitoringActivity extends Activity  {
     	});
     }
 
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		spinnerValue = parent.getItemAtPosition(position).toString();
+		Toast.makeText(parent.getContext(), spinnerValue, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+
+	}
 }

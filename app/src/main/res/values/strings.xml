@@ -1,5 +1,11 @@
 <resources>
 
     <string name="app_name">BeaconReference</string>
+    
+    <string-array name="statut">
+        <item>Etudiant</item>
+        <item>Professionnel</item>
+        <item>Partenaire</item>
+    </string-array>
 
 </resources>

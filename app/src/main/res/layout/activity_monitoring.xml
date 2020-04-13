@@ -25,13 +25,19 @@
         <requestFocus />
     </EditText>
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/monitoringText" />
+
     <Button
         android:id="@+id/Button01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:onClick="onRangingClicked"
-        android:layout_below="@+id/monitoringText"
+        android:layout_below="@+id/spinner1"
         android:text="Start Ranging" />
 
     <Button
@@ -39,7 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onEnableClicked"
-        android:layout_below="@+id/monitoringText"
+        android:layout_below="@+id/spinner1"
         android:layout_toRightOf="@id/Button01"
         android:text="Disable monitoring" />
+
 </RelativeLayout>

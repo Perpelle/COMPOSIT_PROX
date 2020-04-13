@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import org.altbeacon.beacon.AltBeacon;
@@ -76,28 +77,31 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                     alarme = MediaPlayer.create(getApplicationContext(), R.raw.alarme1);
                     alarme.setLooping(true);
                     alarme.seekTo(0);
-                    if (a.equals("intimiZone")) {
+                    if (a.equals("intimiZone") && !MonitoringActivity.spinnerValue.equals("Partenaire")) {
                         alarme.setVolume(3f,3f);
                         alarme.start();
 
-                    } else if (a.equals("personalZone")) {
+                    } else if (a.equals("personalZone") && !MonitoringActivity.spinnerValue.equals("Partenaire")) {
                         //Alarme sur le telephone
                         alarme.setVolume(0.5f,0.5f);
                         alarme.start();
 
-                    } else if (a.equals("socialZone")) {
+                    } else if (a.equals("socialZone") && !MonitoringActivity.spinnerValue.equals("Partenaire")) {
                         //Afficher certaines informations
                         if(alarme.isPlaying()) {
                             alarme.pause();
                         }
                         Log.d("DIST", info);
 
-                    } else if (a.equals("publicZone")) {
+                    } else if (a.equals("publicZone") && !MonitoringActivity.spinnerValue.equals("Partenaire")) {
                         //Afficher certaines informations
                         if(alarme.isPlaying()) {
                             alarme.pause();
                         }
                         Log.d("DIST", info);
+                    } else if (MonitoringActivity.spinnerValue.equals("Partenaire")){
+                        //Afficher certaines informations
+
                     }
                 }
             }
