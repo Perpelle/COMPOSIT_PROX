@@ -77,7 +77,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                     alarme.setLooping(true);
                     alarme.seekTo(0);
                     if (a.equals("intimiZone")) {
-                        alarme.setVolume(1f,1f);
+                        alarme.setVolume(3f,3f);
                         alarme.start();
 
                     } else if (a.equals("personalZone")) {
